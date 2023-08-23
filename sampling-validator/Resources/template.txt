@@ -1,0 +1,6 @@
+Expected Numbers: %expectedNumbers%
+Actual Numbers: %actualNumbers%
+Missing Numbers: %missingNumbers%
+
+Numbers of lines which is over 1.1sec: %overNumbers%
+Numbers of lines which is over 10sec: %over10Numbers%
