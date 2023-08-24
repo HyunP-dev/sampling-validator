@@ -59,12 +59,11 @@ namespace sampling_validator
             {
                 try
                 {
-                    List<long> timestamps = text.Split(new string[] { "\n" }, StringSplitOptions.None).ToList()
-                         .ConvertAll(x => x.Split(new string[] { "," }, StringSplitOptions.None)[0])
-                         .Skip(1)
-                         .Where(x => !string.IsNullOrEmpty(x))
-                         .ToList()
-                         .ConvertAll(long.Parse);
+                    List<long> timestamps =
+                        (from line in text.Split(new string[] { "\n" }, StringSplitOptions.None).Skip(1)
+                         where !string.IsNullOrEmpty(line)
+                         select long.Parse(line.Split(new string[] { "," }, StringSplitOptions.None).First()))
+                        .ToList();
                     List<int> dts = diff(timestamps);
                     int expectedNumbers = (int)((timestamps.Last() - timestamps.First()) / 1000);
                     textBox2.Text = Resources.Template.Replace("\n", Environment.NewLine)
